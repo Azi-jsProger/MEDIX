@@ -1,0 +1,53 @@
+.register {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.register h1 {
+    font-size: 34px;
+    color: white;
+}
+
+.register p {
+    color: white;
+    margin: 39px 0;
+}
+
+
+.form-reg {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.password {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+
+.password button {
+    border: none;
+    background: transparent;
+    position: absolute;
+    right: 14px;
+}
+
+.password img {
+    width: 26px;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+}
+
+.remember label {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+}
