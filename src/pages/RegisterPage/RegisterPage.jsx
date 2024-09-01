@@ -1,28 +1,46 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import InputMaterial from "../../components/materialInput/inputMaterial";
 import './register.css';
 import glassLogo from '../../assets/icons/free-icon-eye-158746.png';
 import hide from '../../assets/icons/free-icon-hide-2767146.png';
 import CheckBox from "../../components/materialCheckBox/checkBox";
 import ButtonMaterial from "../../components/materialButton/buttonMaterial";
-import { axiosInstance } from "../../Utils/API/api";
-import { useForm } from "react-hook-form";
+import {useNavigate} from "react-router-dom";
+import {axiosInstance} from "../../Utils/API/api";
 
 const RegisterPage = () => {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm({ mode: 'onChange' });
 
-    const onSubmit = async (data) => {
+
+    const [formData, setFormData] = useState({
+        username: '',
+        password: '',
+        speciality: '',
+        login: ''
+    });
+
+    const navigate = useNavigate()
+
+    const linkChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value});
+    };
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
         try {
-            const response = await axiosInstance.post('/register', data);
+            const response = await axiosInstance.post('/register', formData);
             console.log(response.data);
+            if (response.status === 201) {
+                const userId = response.data._id;
+                console.log("User ID:", userId);
+                navigate(`/profile/${userId}`);
+            }
         } catch (error) {
-            console.error('Error registering user', error);
+            console.error('Error registering user', error.response ? error.response.data : error.message);
         }
     };
+
+
+
 
     const styles = {
         width: "300px",
@@ -62,24 +80,75 @@ const RegisterPage = () => {
             <h1>Зарегистрироваться</h1>
             <p>Зарегистрировайтесь и начните свою работу</p>
 
-            <form onSubmit={handleSubmit(onSubmit)} className='form-reg'>
-                <InputMaterial style={styles} label='ФИО' {...register('username', { required: true })} />
-                <InputMaterial style={styles} label='Специальность' {...register('speciality', { required: true })} />
-                <InputMaterial style={styles} label='Логин' placeholder='Придумайте логин' {...register('login', { required: true })} />
+
+            <form onSubmit={onSubmit} className='form-reg'>
+
+                <InputMaterial
+                    id='username-input'
+                    style={styles}
+                    label='ФИО'
+                    name='username'
+                    value={formData.username}
+                    onChange={linkChange}
+                    required
+                />
+
+                <InputMaterial
+                    id='speciality-input'
+                    style={styles}
+                    label='Специальность'
+                    name='speciality'
+                    value={formData.speciality}
+                    onChange={linkChange}
+                    required
+                />
+
+                <InputMaterial
+                    id='login-input'
+                    style={styles}
+                    label='Логин'
+                    placeholder='Придумайте логин'
+                    name='login'
+                    value={formData.login}
+                    onChange={linkChange}
+                    required
+                />
+
                 <div className="password">
-                    <InputMaterial style={styles} label='Пароль' placeholder='Придумайте пароль' type={type} {...register('password', { required: true })} />
+                    <InputMaterial
+                        id='password-input'
+                        style={styles}
+                        label='Пароль'
+                        name='password'
+                        placeholder='Придумайте пароль'
+                        type={type}
+                        value={formData.password}
+                        onChange={linkChange}
+                        required
+                    />
+
                     <button type="button" onClick={switchType}><img src={glass} alt=""/></button>
                 </div>
+
                 <div className="password">
-                    <InputMaterial style={styles} label='Повторите Пароль' type={repeat} {...register('repeatPassword', { required: true })} />
+                    <InputMaterial
+                        id='repeat-input'
+                        style={styles}
+                        placeholder='Повторите пароль'
+                        label='Повторите Пароль'
+                        type={repeat}
+                        name='repeat_password'
+                        required
+                    />
+
                     <button type="button" onClick={switchHide}><img src={hiding} alt=""/></button>
                 </div>
                 <div className="remember">
-                    <CheckBox id='rem' />
+                    <CheckBox id='rem'/>
                     <label htmlFor="rem">Запомнить меня</label>
                 </div>
 
-                <ButtonMaterial type="submit" value='зарегистрироваться' style={style} />
+                <ButtonMaterial type='submit' value='зарегистрироваться' style={style}/>
             </form>
         </div>
     );

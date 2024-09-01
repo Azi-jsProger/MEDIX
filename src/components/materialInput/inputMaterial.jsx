@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from '@mui/material/TextField';
 
 const InputMaterial = (props) => {
-    const { style,label,placeholder,type } = props;
+    const { style,label,placeholder,type,value,onChange,name,id } = props;
 
     return (
         <TextField
@@ -12,6 +12,7 @@ const InputMaterial = (props) => {
                     '& fieldset': {
                         borderColor: 'transparent', // убираем границу
                         borderRadius: '10px', // скругление углов
+                        outline:'none',
                     },
                     '&:hover fieldset': {
                         borderColor: 'transparent', // убираем границу при hover
@@ -50,11 +51,14 @@ const InputMaterial = (props) => {
                     },
                 },
             }}
-            id="outlined-basic"
+            id={id}
             label={label}
             variant="outlined"
             placeholder={placeholder}
             type={type}
+            value={value}
+            onChange={onChange}
+            name={name}
         />
     );
 };

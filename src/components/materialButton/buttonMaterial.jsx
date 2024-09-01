@@ -6,11 +6,12 @@ const ButtonMaterial = (props) => {
     const {
         value,
         style,
-        onClick
+        onClick,
+        type
     } = props
 
     return (
-        <Button onClick={onClick} sx={style}>{value}</Button>
+        <Button type={type} onClick={onClick} sx={style}>{value}</Button>
     );
 };
 
