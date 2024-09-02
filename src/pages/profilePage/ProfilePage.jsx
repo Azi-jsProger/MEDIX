@@ -1,12 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+import './profile.css'
+import ButtonMaterial from "../../components/materialButton/buttonMaterial";
 
 const ProfilePage = () => {
     const { id } = useParams();
-    console.log("User ID:", id);  // Для отладки
-
     const [userData, setUserData] = useState(null);
+
+    const style = {
+        width:'200px',
+        height: '50px',
+    }
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -30,9 +37,21 @@ const ProfilePage = () => {
 
     return (
         <div className='profile'>
-            <h1>Welcome, {userData.username}</h1>
-            <p>Login: {userData.login}</p>
-            <p>Speciality: {userData.speciality}</p>
+            <div className="user-card">
+                <h1>Добро Пожаловать!</h1>
+                <h2>{userData.username}</h2>
+                <p>Login: {userData.login}</p>
+                <p>Speciality: {userData.speciality}</p>
+
+                <div className='form-profile'>
+                    <ButtonMaterial
+                        style={style}
+                        value='Назад'
+                        // onClick={}
+                    />
+                </div>
+
+            </div>
         </div>
     );
 };

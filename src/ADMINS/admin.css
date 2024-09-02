@@ -1,0 +1,49 @@
+.admins {
+
+}
+
+.admins h1 {
+    text-align: center;
+    margin-top: 20px;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 55px;
+}
+
+.users__card {
+    margin-top: 60px;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.user-card {
+    margin-bottom: 50px;
+    border: none;
+    border-radius: 22px;
+    background:white;
+    padding: 40px 70px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.user-card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.user-card h3 {
+    /*text-align: center;*/
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.user-card p {
+    font-weight: 300;
+}
+
+.user-card * {
+    color: black;
+}

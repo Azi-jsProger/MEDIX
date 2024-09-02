@@ -1,0 +1,12 @@
+.profile {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-profile {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+}
