@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { axiosInstance } from '../../Utils/API/api';
+import { axiosInstance } from '../../Utils/API/axiosInstance';
 import InputMaterial from "../../components/materialInput/inputMaterial";
 import CheckBox from "../../components/materialCheckBox/checkBox";
 import ButtonMaterial from "../../components/materialButton/buttonMaterial";

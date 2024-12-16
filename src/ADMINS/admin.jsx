@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { axiosInstance } from "../Utils/API/api";
+import { axiosInstance } from "../Utils/API/axiosInstance";
 import './admin.css';
+import ButtonMaterial from "../components/materialButton/buttonMaterial";
 
 const Admin = () => {
     const [user, setUser] = useState([]);
@@ -29,19 +30,41 @@ const Admin = () => {
         getUser();
     }, []);
 
+
+    function switchBack () {
+        navigate('/')
+    }
+
+    const style = {
+        width:'200px',
+        height: '50px',
+        marginBottom:'150px',
+        border:'1px solid white',
+        color:'white',
+        fontSize:'18px',
+        fontWeight:'700'
+    }
+
     return (
         <div className='admins'>
             <h1>Admin</h1>
             <div className="users__card">
                 {user.map((item, idx) => (
-                    <div className='user-card' key={idx}>
+                    <div className='admin-card' key={idx}>
                         <h2>User detail</h2>
                         <h3>{item.username}</h3>
                         <p>Speciality: {item.speciality}</p>
                         <p>Login: {item.login}</p>
-                        <p>Password: {item.password}</p>
+                        <p>Password: <span>{item.password}</span> </p>
                     </div>
                 ))}
+            </div>
+            <div className='form-profile'>
+                <ButtonMaterial
+                    style={style}
+                    value='Назад'
+                    onClick={switchBack}
+                />
             </div>
         </div>
     );
